@@ -1,88 +1,3 @@
-//Education Details
-var education = {
-    "schools": [
-        {
-            "name": "Wayne State University",
-            "location": "Detroit, MI",
-            "degree": "Masters",
-            "majors": "Industrial Engineering",
-            "minors": [
-                "Enterprise Resource Planning",
-                "Supply Chain Management"
-            ],
-            "dates": "2005 - 2008",
-            "url": "www.wsu.edu"
-        },
-        {
-            "name": "Jawaharlal Nehru Technology",
-            "location": "Hyderabad, India",
-            "degree": "Bachelors",
-            "majors": "Mechatronics",
-            "minors": [
-                "Mechanical Engineering",
-                "Electrical Engineering"
-            ],
-            "dates": "2000 - 2004",
-            "url": "www.jntu.ac.in"
-        }
-    ],
-    "onlineCourseInfo":
-    [
-    	{
-	        "name": "Udacity",
-	        "course": "Front End Web Development",
-	        "dates": "2015",
-	        "url": "www.udacity.com"
-	    }
-    ]
-};
-//Work Details
-var work = {
-	"jobs":
-	[
-		{
-			"employer": "Starbucks Coffee Company",
-			"title": "Application Developer Sr.",
-			"location": "Seattle, WA",
-			"dates": "Aug 2011 - Now",
-			"description": "HR Application Developer"
-		},
-		{
-			"employer": "Altus Systems Inc",
-			"title": "Programmer Analyst",
-			"location": "Detroit, MI",
-			"dates": "Apr 2008 - Aug 2011",
-			"description": "Application Developer"
-		}
-	]
-};
-//Bio
-var bio = {
-	"name" : "Chaitanya Chilaka",
-	"role" : "Front End Developer",
-	"skills" : ["Awesome", "HTML5", "CSS3", "JavaScript", "Version Control", "Responsive Design"],
-	"contacts" : {
-		"mobile" : "313-717-1795",
-		"email" : "chaitanya4u@gmail.com",
-		"github" : "chaitanya4u",
-		"twitter" : "@chaitanya4u",
-		"location" : "Seattle, WA"
-	},
-	"picUrl" : "images/fry.jpg",
-	"welcomeMessage" : "Welcome to the world of Front End Development"
-};
-//Projects
-var projects = {
-	"projects":
-	[
-		{
-			"title": "Self Service for Thailand",
-			"dates": "08/2015 - 12/2015",
-			"description": "This is for partners in Thailand to Log in to view their personal information",
-			"images": "images/fry.jpg"
-		}
-	]
-};
 // Print Name
 var formattedName = HTMLheaderName.replace("%data%", bio.name);
 $("#header").append(formattedName);
@@ -101,7 +16,7 @@ $("#contacts").append(formattedEmail);
 //Print Contact - github
 var formattedGithub = HTMLgithub.replace("%data%",bio.contacts.github);
 $("#contacts").append(formattedGithub);
-//Print Contact - github
+//Print Contact - twitter
 var formattedtwitter = HTMLtwitter.replace("%data%",bio.contacts.twitter);
 $("#contacts").append(formattedtwitter);
 //Print Contact - location
@@ -160,8 +75,7 @@ function inName(name){
 	return(fname);
 }
 //Display Projects
-// projects.display = function() {
-function displayProjects(){
+projects.display = function() {
 	for (var project in projects.projects) {
 		$("#projects").append(HTMLprojectStart);
 		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
@@ -173,18 +87,14 @@ function displayProjects(){
 		var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images);
 		$(".project-entry:last").append(formattedImage);
 	}
-}
-displayProjects();
-$('#mapDiv').append(googleMap);
-//Display Educatoin Details
-// education.display = function(){
+};
+projects.display();
+//Display Education Details
 function displayEducation(){
 	for (var school in education.schools){
 		$("#education").append(HTMLschoolStart);
 		var formattedschoolName = HTMLschoolName.replace("%data%",education.schools[school].name) + HTMLschoolDegree.replace("%data%",education.schools[school].degree);
 		$(".education-entry:last").append(formattedschoolName);
-		// var formattedDegree = HTMLschoolDegree.replace("%data%",education.schools[school].degree);
-		// $(".education-entry:last").append(formattedDegree);
 		var formattedDates = HTMLschoolDates.replace("%data%",education.schools[school].dates);
 		$(".education-entry:last").append(formattedDates);
 		var formattedLocation = HTMLschoolLocation.replace("%data%",education.schools[school].location);
@@ -194,3 +104,18 @@ function displayEducation(){
 	}
 }
 displayEducation();
+//Display Education Details
+function displayOnlineEducation(){
+	for (var school in education.onlineCourseInfo){
+		$(".education-entry:last").append(HTMLonlineClasses);
+		var formattedTitle = HTMLonlineTitle.replace("%data%",education.onlineCourseInfo[school].name) + HTMLonlineSchool.replace("%data%",education.schools[school].degree);
+		$(".education-entry:last").append(formattedTitle);
+		var formattedDates = HTMLonlineDates.replace("%data%",education.onlineCourseInfo[school].dates);
+		$(".education-entry:last").append(formattedDates);
+		var formattedLocation = HTMLonlineURL.replace("%data%",education.onlineCourseInfo[school].url);
+		$(".education-entry:last").append(formattedLocation);
+	}
+}
+displayOnlineEducation();
+//Display Locations on Google Map
+$('#mapDiv').append(googleMap);

@@ -65,7 +65,7 @@ The International Name challenge in Lesson 2 where you'll create a function that
 */
 $(document).ready(function() {
   $('button').click(function() {
-    var iName = inName(name) || function(){};
+    var iName = inName(bio.name) || function(){};
     $('#name').html(iName);
   });
 });
@@ -92,8 +92,6 @@ $(document).click(function(loc) {
   logClicks(xX,yY);
 });
 
-
-
 /*
 This is the fun part. Here's where we generate the custom Google Map for the website.
 See the documentation below for more details.
@@ -110,13 +108,13 @@ function initializeMap() {
   var locations;
 
   var mapOptions = {
-    disableDefaultUI: true
+    // disableDefaultUI: true,
+    center: new google.maps.LatLng(39.50, -98.35),
+    zoom: 4
   };
-
   // This next line makes `map` a new Google Map JavaScript Object and attaches it to
   // <div id="map">, which is appended as part of an exercise late in the course.
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
-
 
   /*
   locationFinder() returns an array of every location string from the JSONs
@@ -141,6 +139,7 @@ function initializeMap() {
     for (var job in work.jobs) {
       locations.push(work.jobs[job].location);
     }
+    console.log(locations);
 
     return locations;
   }
@@ -151,10 +150,10 @@ function initializeMap() {
   about a single location.
   */
   function createMapMarker(placeData) {
-
+    console.log(placeData);
     // The next lines save location data from the search result object to local variables
-    var lat = placeData.geometry.location.k;  // latitude from the place service
-    var lon = placeData.geometry.location.D;  // longitude from the place service
+    var lat = placeData.geometry.location.lat();  // latitude from the place service
+    var lon = placeData.geometry.location.lng();  // longitude from the place service
     var name = placeData.formatted_address;   // name of the place from the place service
     var bounds = window.mapBounds;            // current boundaries of the map window
 
@@ -175,6 +174,7 @@ function initializeMap() {
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      infoWindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.
@@ -208,6 +208,7 @@ function initializeMap() {
 
     // Iterates through the array of locations, creates a search object for each location
     for (var place in locations) {
+        console.log(locations[place]);
 
       // the search request object
       var request = {
@@ -227,7 +228,7 @@ function initializeMap() {
   locations = locationFinder();
 
   // pinPoster(locations) creates pins on the map for each location in
-  // the locations array
+  // the locations arra
   pinPoster(locations);
 
 }
