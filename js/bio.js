@@ -1,3 +1,4 @@
+(function() {"use strict";}());
 //Bio
 var bio = {
 	"name" : "Chaitanya Fakename",

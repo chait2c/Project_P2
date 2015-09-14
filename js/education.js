@@ -1,3 +1,4 @@
+(function() {"use strict";}());
 //Education Details
 var education = {
     "schools": [

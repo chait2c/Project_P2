@@ -1,3 +1,4 @@
+(function() {"use strict";}());
 //Projects
 var projects = {
 	"projects":
